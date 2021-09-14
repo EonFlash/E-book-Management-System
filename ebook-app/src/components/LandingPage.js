@@ -1,6 +1,10 @@
 import React from "react";
 import circle from "../img/circle.png";
 import book from "../img/book-png.webp";
+//FONT AWESOME
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
+
 //REACT_ROUTER_DOM
 import { Link } from "react-router-dom";
 
@@ -10,10 +14,19 @@ export const LandingPage = () => {
   return (
     <Landing>
       <Nav>
-        <img className="circle" src={circle} alt="circle" />
-        <ul className="list">
+        <div className="logo">
+          <img className="circle" src={circle} alt="circle" />
           <li>Whats inside</li>
           <li>Creator</li>
+        </div>
+
+        <ul className="list">
+          <li className="icon">
+            <FontAwesomeIcon icon={faTwitter}></FontAwesomeIcon>
+          </li>
+          <li className="icon">
+            <FontAwesomeIcon icon={faGithub}></FontAwesomeIcon>
+          </li>
         </ul>
       </Nav>
 
@@ -22,7 +35,10 @@ export const LandingPage = () => {
           <img src={book} alt="Book" />
         </div>
         <div className="text">
-          <h1>Success Starts With A Great Book</h1>
+          <h1 className="sucess">Success</h1>
+          <h1>Starts </h1>
+          <h1>With A </h1>
+          <h1>Great Book</h1>
           <Link to="/login">
             <button> Login</button>
           </Link>
@@ -43,6 +59,27 @@ const Landing = styled.div`
 
 const Nav = styled.div`
   display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: space-between;
+
+  .logo {
+    color: white;
+    display: flex;
+    li {
+      padding: 25px;
+      list-style: none;
+      font-size: 1.2rem;
+    }
+  }
+  .sucess {
+    h1 {
+      font-weight: bold;
+    }
+  }
+  .icon {
+    font-size: 35px;
+  }
   img {
     -webkit-filter: invert(1);
     filter: invert(1);
@@ -64,9 +101,10 @@ const Container = styled.div`
   height: 60vh;
   justify-content: center;
   align-items: center;
-  margin-left: 150px;
+
   margin-top: -60px;
   .book {
+    padding-right: 200px;
     img {
       -webkit-filter: invert(1);
       filter: invert(1);
@@ -76,6 +114,8 @@ const Container = styled.div`
     }
   }
   .text {
+    margin-top: 300px;
+    padding-right: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;

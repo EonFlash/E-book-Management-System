@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import bg from "../img/bg.jpg";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -58,7 +57,6 @@ h4{
     }
 
     p{
-        padding: 3rem 0rem;
         color: white;
         font-size: 1.4rem;
         line-height: 150%;
