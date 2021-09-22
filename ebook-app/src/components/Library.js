@@ -1,53 +1,57 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import Book from "./Book";
 
 export const Library = () => {
-  const [isLoading, setisLoading] = useState(true);
-  const [Books, setBooks] = useState([]);
+  //STATES-----------------------------------------------------------
+
+  const [BookList, setBookList] = useState([]);
+
+  //URL-------------------------------------------------------------
 
   useEffect(() => {
     console.log("This will be loaded first");
-
     getData();
   }, []);
 
   const getData = () => {
     axios
-      .get("https://www.googleapis.com/books/v1/volumes?q=harry+potter")
+      .get("https://www.googleapis.com/books/v1/volumes?q=robot")
       .then((data) => {
-        setisLoading(false);
-
         if (data) {
-          setBooks(data.data.items);
-          console.log(Books);
+          console.log(data.data.items);
+          setBookList(data.data.items);
         } else {
           console.log("AN ERROR OCURED");
         }
       })
       .catch((err) => {
-        setisLoading(false);
         console.log("AN ERROR OCURED", err);
       });
   };
 
-  const booksRenderer = Books.map((book) => {
-    console.log(book.volumeInfo.title);
-    return <div key={book.id}>{book.volumeInfo.title}</div>;
-  });
-
-  const content = isLoading ? <h1>LOADING....</h1> : booksRenderer;
-
-  //data.data.items.volumeInfo.title
-
-  //{state.isSignedIn ? <h1>{bookTitle}</h1> : <h1>Not signed in</h1>}
+  //Main APP---------------------------------------------------------
   return (
     <LibraryPage>
-      <h1>HERE ARE THE BOOKS--</h1>
-      {content}
+      <input type="text" placeholder="Search" />
+      <button type="submit">Search</button>
+      {BookList.map((book) => {
+        return (
+          <Book
+            title={book.volumeInfo.title}
+            thumbnail={book.volumeInfo.imageLinks.thumbnail}
+            des={book.volumeInfo.description}
+            author={book.volumeInfo.authors}
+            readLink={book.volumeInfo.previewLink}
+          />
+        );
+      })}
     </LibraryPage>
   );
 };
+
+//STYLING---------------------------------------------------------------
 
 const LibraryPage = styled.div`
   background-image: url(" https://images.pexels.com/photos/3289156/pexels-photo-3289156.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
@@ -55,5 +59,15 @@ const LibraryPage = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  height: 100vh;
+  height: 100%;
+
+  input {
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 30%;
+    height: 5vh;
+    padding: 2rem;
+    border-radius: 15px;
+    font-size: 25px;
+  }
 `;

@@ -5,6 +5,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
+import GoogleLogin from "react-google-login";
+
 import { auth } from "../firebase";
 
 const Login = () => {
@@ -40,6 +42,19 @@ const Login = () => {
       .catch((error) => alert(error.message));
   };
 
+  const responseGoogle = (response) => {
+    console.log(response);
+    console.log(response.profileObj);
+    setUserID(response.profileObj.googleId);
+    history.push("/library");
+  };
+
+  const error = () => {
+    alert("User closed the window or an error has occured");
+  };
+
+  const [UserID, setUserID] = useState();
+
   return (
     <LoginStyle>
       <div className="container">
@@ -69,6 +84,13 @@ const Login = () => {
             Sign In
           </button>
         </form>
+        <h3>Or</h3>
+
+        <GoogleLogin
+          clientId="911177135029-jm5c3l0losvth5s5jjkbdhf6rkqc58fc.apps.googleusercontent.com"
+          onSuccess={responseGoogle}
+          onFailure={error}
+        />
 
         <p>
           Fill up the fields and press "Create Account" button for instant

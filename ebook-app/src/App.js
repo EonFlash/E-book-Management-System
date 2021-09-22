@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 //COMPONENTS
 import { LandingPage } from "./components/LandingPage";
@@ -19,11 +19,11 @@ function App() {
         <Route path="/" exact>
           <LandingPage />
         </Route>
-        <Route path="/login">
+        <Route path="/login" exact>
           <Login />
         </Route>
 
-        <Route path="/library">
+        <Route path="/library" exact>
           <Library />
         </Route>
       </Switch>
