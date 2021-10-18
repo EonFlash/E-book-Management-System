@@ -1,68 +1,40 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 import styled from "styled-components";
-import { Link, Route } from "react-router-dom";
 
-const Book = ({
+const Fbook = ({
   id,
-  title,
   thumbnail,
-  des,
+  title,
   author,
-  BookList,
-  setBookList,
-  favBook,
-  setfavBook,
+  des,
   favList,
   setfavList,
-  getSearch,
-  tempState,
-  setTempState,
-  wish,
-  setWish,
+  BookList,
+  read,
 }) => {
-  const addFav = () => {
-    //setBookList(BookList.filter((t) => id !== t.id));
-    setfavList([...favList, BookList.find((t) => id == t.id)]);
-    alert("The Book was Added to FAV");
-  };
-
   const remove = () => {
     setfavList(favList.filter((t) => id !== t.id));
-    alert("The Book was Removed from FAV");
-  };
-
-  const wishHandler = () => {
-    setWish([...wish, BookList.find((t) => id == t.id)]);
-    alert("The Book was Added to WISHLIST");
-  };
-
-  const wishRemove = () => {
-    setWish(wish.filter((t) => id !== t.id));
-    alert("The Book was Removed from WISHLIST");
   };
 
   return (
-    <BookStyle>
-      <div className="card">
-        <div className="card-header">
-          <img src={thumbnail} alt="Book Cover" />
-        </div>
-        <div className="card-body">
-          <span className="tag tag-teal">{author}</span>
-          <h4>{title}</h4>
-          <p>{des}</p>
-          
-          
-        <div className="btn">
-          <button onClick={addFav}>ADD TO FAV</button>
-          <button onClick={remove}>REMOVE FAV</button>
-          <button onClick={wishHandler}>ADD TO WISHLIST</button>
-          <button onClick={wishRemove}>REMOVE From WISHLIST</button>
+    <div>
+      <BookStyle>
+        <div className="card">
+          <div className="card-header">
+            <img src={thumbnail} alt="Book Cover" />
+          </div>
+          <div className="card-body">
+            <span className="tag tag-teal">{author}</span>
+            <h4>{title}</h4>
+            <p>{des}</p>
+            <button onClick={remove}>Remove Fav</button>
+            <a target="_blank" href={read}>
+              <button>Read Now</button>
+            </a>
           </div>
         </div>
-      </div>
-    </BookStyle>
+      </BookStyle>
+    </div>
   );
 };
 
@@ -142,4 +114,4 @@ const BookStyle = styled.div`
   }
 `;
 
-export default Book;
+export default Fbook;
