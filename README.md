@@ -1,2 +1,1 @@
-# E-book Management System
- 
+Used Google Books API and stripe payment system 
